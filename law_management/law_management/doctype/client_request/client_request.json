@@ -2,7 +2,8 @@
  "actions": [],
  "allow_rename": 1,
  "autoname": "CRE.#####",
- "creation": "2022-07-05 12:06:54.389787",
+ "creation": "2024-02-13 09:44:41.530938",
+ "default_view": "List",
  "doctype": "DocType",
  "editable_grid": 1,
  "engine": "InnoDB",
@@ -19,28 +20,24 @@
  "fields": [
   {
    "fieldname": "name1",
-   "fieldtype": "Data",
-   "in_list_view": 1,
+   "fieldtype": "Link",
    "label": "Client Name",
-   "reqd": 1
+   "options": "Customer"
   },
   {
    "fieldname": "contact_no",
    "fieldtype": "Data",
-   "in_list_view": 1,
    "label": "Contact No"
   },
   {
    "fieldname": "services",
    "fieldtype": "Link",
-   "in_list_view": 1,
    "label": "Services",
    "options": "Client Services"
   },
   {
    "fieldname": "email",
    "fieldtype": "Data",
-   "in_list_view": 1,
    "label": "Email"
   },
   {
@@ -51,7 +48,6 @@
   {
    "fieldname": "matter_type",
    "fieldtype": "Select",
-   "in_list_view": 1,
    "label": "Matter Type",
    "options": "Criminal\nCivil"
   },
@@ -68,7 +64,7 @@
  ],
  "index_web_pages_for_search": 1,
  "links": [],
- "modified": "2022-11-21 16:33:49.925256",
+ "modified": "2024-02-13 09:45:09.259979",
  "modified_by": "Administrator",
  "module": "Law Management",
  "name": "Client Request",
@@ -84,18 +80,6 @@
    "read": 1,
    "report": 1,
    "role": "System Manager",
-   "share": 1,
-   "write": 1
-  },
-  {
-   "create": 1,
-   "delete": 1,
-   "email": 1,
-   "export": 1,
-   "print": 1,
-   "read": 1,
-   "report": 1,
-   "role": "Lawyer",
    "share": 1,
    "write": 1
   }

@@ -1,43 +1,37 @@
 {
  "actions": [],
  "allow_rename": 1,
- "autoname": "PA.#####",
+ "autoname": "field:name1",
  "creation": "2022-07-04 16:02:02.781445",
  "doctype": "DocType",
  "editable_grid": 1,
  "engine": "InnoDB",
  "field_order": [
   "name1",
-  "code",
-  "specialization"
+  "code"
  ],
  "fields": [
   {
    "fieldname": "name1",
    "fieldtype": "Data",
    "in_list_view": 1,
-   "label": "Name"
+   "label": "Name",
+   "unique": 1
   },
   {
    "fieldname": "code",
    "fieldtype": "Data",
    "in_list_view": 1,
    "label": "Code"
-  },
-  {
-   "fieldname": "specialization",
-   "fieldtype": "Select",
-   "in_list_view": 1,
-   "label": "Specialization",
-   "options": "Civil\nCriminal"
   }
  ],
  "index_web_pages_for_search": 1,
  "links": [],
- "modified": "2022-07-04 16:02:26.674632",
+ "modified": "2024-02-13 10:46:09.312707",
  "modified_by": "Administrator",
  "module": "Law Management",
  "name": "Practice Area",
+ "naming_rule": "By fieldname",
  "owner": "Administrator",
  "permissions": [
   {
@@ -54,5 +48,6 @@
   }
  ],
  "sort_field": "modified",
- "sort_order": "DESC"
+ "sort_order": "DESC",
+ "states": []
 }

@@ -12,6 +12,8 @@
   "category",
   "assign_to",
   "practice_area",
+  "amount",
+  "request_to",
   "column_break_6",
   "client_section",
   "frequent_client",
@@ -20,15 +22,16 @@
   "payment_type",
   "important_dates",
   "description",
-  "matter_details_section",
-  "date",
-  "attack_type",
-  "victims",
-  "perpetrators",
-  "suspects",
   "documents_section",
   "attachments",
   "description_doc",
+  "section_break_j6ish",
+  "matter_details_section",
+  "date",
+  "attack_type",
+  "plaintiff",
+  "perpetrators",
+  "defendant",
   "acts_and_articles_section",
   "acts",
   "article",
@@ -44,7 +47,8 @@
   "sitting_details",
   "sitting_info",
   "history_section",
-  "history"
+  "history",
+  "invoice_request"
  ],
  "fields": [
   {
@@ -58,10 +62,10 @@
   },
   {
    "fieldname": "matter_type",
-   "fieldtype": "Select",
+   "fieldtype": "Link",
    "in_list_view": 1,
    "label": "Matter Type",
-   "options": "Criminal\nCivil"
+   "options": "Matter Type"
   },
   {
    "fieldname": "category",
@@ -123,25 +127,15 @@
   {
    "fieldname": "attack_type",
    "fieldtype": "Data",
+   "hidden": 1,
    "label": "Attack Type"
-  },
-  {
-   "fieldname": "victims",
-   "fieldtype": "Table",
-   "label": "Victims",
-   "options": "Victims"
   },
   {
    "fieldname": "perpetrators",
    "fieldtype": "Table",
+   "hidden": 1,
    "label": "Perpetrators",
    "options": "Perpetrators"
-  },
-  {
-   "fieldname": "suspects",
-   "fieldtype": "Table",
-   "label": "Suspects",
-   "options": "Suspects"
   },
   {
    "collapsible": 1,
@@ -273,11 +267,46 @@
    "fieldname": "retain_client",
    "fieldtype": "Check",
    "label": "Retain "
+  },
+  {
+   "fieldname": "plaintiff",
+   "fieldtype": "Table",
+   "label": "Plaintiff",
+   "options": "Plaintiff"
+  },
+  {
+   "fieldname": "defendant",
+   "fieldtype": "Table",
+   "label": "Defendant",
+   "options": "Defendants"
+  },
+  {
+   "fieldname": "amount",
+   "fieldtype": "Currency",
+   "hidden": 1,
+   "label": "Amount"
+  },
+  {
+   "fieldname": "section_break_j6ish",
+   "fieldtype": "Section Break"
+  },
+  {
+   "fieldname": "invoice_request",
+   "fieldtype": "Data",
+   "hidden": 1,
+   "label": "Invoice Request"
+  },
+  {
+   "fieldname": "request_to",
+   "fieldtype": "Link",
+   "hidden": 1,
+   "label": "Request To",
+   "options": "User"
   }
  ],
  "index_web_pages_for_search": 1,
  "links": [],
- "modified": "2024-01-25 16:25:57.162609",
+ "modified": "2024-02-16 20:39:04.390965",
  "modified_by": "Administrator",
  "module": "Law Management",
  "name": "Matter",
