@@ -283,6 +283,7 @@
   {
    "fieldname": "amount",
    "fieldtype": "Currency",
+   "hidden": 1,
    "label": "Amount"
   },
   {
@@ -298,13 +299,14 @@
   {
    "fieldname": "request_to",
    "fieldtype": "Link",
+   "hidden": 1,
    "label": "Request To",
    "options": "User"
   }
  ],
  "index_web_pages_for_search": 1,
  "links": [],
- "modified": "2024-02-15 15:16:31.134429",
+ "modified": "2024-02-16 20:39:04.390965",
  "modified_by": "Administrator",
  "module": "Law Management",
  "name": "Matter",
