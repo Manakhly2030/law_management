@@ -65,7 +65,8 @@
    "fieldtype": "Link",
    "in_list_view": 1,
    "label": "Matter Type",
-   "options": "Matter Type"
+   "options": "Matter Type",
+   "reqd": 1
   },
   {
    "fieldname": "category",
@@ -93,7 +94,8 @@
    "fieldname": "client_name",
    "fieldtype": "Link",
    "label": "Client Name",
-   "options": "Customer"
+   "options": "Customer",
+   "reqd": 1
   },
   {
    "fieldname": "payment_type",
@@ -306,7 +308,7 @@
  ],
  "index_web_pages_for_search": 1,
  "links": [],
- "modified": "2024-02-16 20:39:04.390965",
+ "modified": "2024-02-19 12:23:16.606837",
  "modified_by": "Administrator",
  "module": "Law Management",
  "name": "Matter",
