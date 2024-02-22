@@ -28,6 +28,7 @@ fixtures = [{
 # include js, css files in header of desk.html
 # app_include_css = "/assets/law_management/css/law_management.css"
 # app_include_js = "/assets/law_management/js/law_management.js"
+# app_include_js = "/public/js/custom.js"
 
 # include js, css files in header of web template
 # web_include_css = "/assets/law_management/css/law_management.css"

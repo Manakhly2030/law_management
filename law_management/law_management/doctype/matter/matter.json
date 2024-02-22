@@ -10,9 +10,7 @@
   "matter_name",
   "matter_type",
   "category",
-  "assign_to",
   "practice_area",
-  "amount",
   "request_to",
   "column_break_6",
   "client_section",
@@ -21,17 +19,19 @@
   "client_name",
   "payment_type",
   "important_dates",
+  "invoice_section_break",
+  "amount",
   "description",
+  "send_invoice_request",
   "documents_section",
   "attachments",
   "description_doc",
-  "section_break_j6ish",
   "matter_details_section",
   "date",
   "attack_type",
   "plaintiff",
-  "perpetrators",
   "defendant",
+  "details",
   "acts_and_articles_section",
   "acts",
   "article",
@@ -48,7 +48,8 @@
   "sitting_info",
   "history_section",
   "history",
-  "invoice_request"
+  "invoice_request",
+  "is_assign"
  ],
  "fields": [
   {
@@ -74,14 +75,6 @@
    "hidden": 1,
    "label": "Category",
    "options": "Categories"
-  },
-  {
-   "fieldname": "assign_to",
-   "fieldtype": "Link",
-   "hidden": 1,
-   "in_list_view": 1,
-   "label": "Assign to",
-   "options": "Customer"
   },
   {
    "fieldname": "practice_area",
@@ -113,6 +106,7 @@
   {
    "fieldname": "description",
    "fieldtype": "Long Text",
+   "hidden": 1,
    "label": "Description"
   },
   {
@@ -131,13 +125,6 @@
    "fieldtype": "Data",
    "hidden": 1,
    "label": "Attack Type"
-  },
-  {
-   "fieldname": "perpetrators",
-   "fieldtype": "Table",
-   "hidden": 1,
-   "label": "Perpetrators",
-   "options": "Perpetrators"
   },
   {
    "collapsible": 1,
@@ -289,10 +276,6 @@
    "label": "Amount"
   },
   {
-   "fieldname": "section_break_j6ish",
-   "fieldtype": "Section Break"
-  },
-  {
    "fieldname": "invoice_request",
    "fieldtype": "Data",
    "hidden": 1,
@@ -304,11 +287,35 @@
    "hidden": 1,
    "label": "Request To",
    "options": "User"
+  },
+  {
+   "default": "0",
+   "fieldname": "is_assign",
+   "fieldtype": "Int",
+   "hidden": 1,
+   "label": "is Assign"
+  },
+  {
+   "fieldname": "details",
+   "fieldtype": "Long Text",
+   "label": "Details"
+  },
+  {
+   "fieldname": "send_invoice_request",
+   "fieldtype": "Button",
+   "hidden": 1,
+   "label": "Send Invoice Request"
+  },
+  {
+   "collapsible": 1,
+   "fieldname": "invoice_section_break",
+   "fieldtype": "Section Break",
+   "label": "Invoice Request"
   }
  ],
  "index_web_pages_for_search": 1,
  "links": [],
- "modified": "2024-02-19 12:23:16.606837",
+ "modified": "2024-02-20 11:44:44.084095",
  "modified_by": "Administrator",
  "module": "Law Management",
  "name": "Matter",

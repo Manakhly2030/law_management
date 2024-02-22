@@ -2,15 +2,26 @@
 // For license information, please see license.txt
 
 frappe.ui.form.on("Matter", {
-  refresh: async function (frm) {
+  after_save: async (frm) => {
+    const check = await check_assigned_user(frm);
+
+    console.log({ check });
+
+    if (!check) {
+      assigned_current_user(frm);
+    }
+  },
+
+  refresh: async (frm) => {
     const { workflow_state, matter_type } = frm.doc;
 
     frm.toggle_display("category", matter_type === "Litigation");
-    frm.set_df_property("category", "reqd", true);
+    frm.set_df_property("category", "reqd", matter_type === "Litigation");
 
     if (workflow_state !== "Draft") {
-      frm.toggle_display("amount", true);
-      frm.set_df_property("amoutnt", "reqd", true);
+      ["amount", "description", "send_invoice_request"].forEach((field) => {
+        frm.toggle_display(field, true);
+      });
 
       const is_request_sent = await frappe.call({
         method:
@@ -20,9 +31,7 @@ frappe.ui.form.on("Matter", {
         },
       });
 
-      is_request_sent.message
-        ? view_invoice_request(frm)
-        : toggle_invoice_request(frm);
+      if (is_request_sent.message) view_invoice_request(frm);
     }
   },
 
@@ -66,6 +75,13 @@ frappe.ui.form.on("Matter", {
     }
   },
 
+  send_invoice_request: (frm) => {
+    const { workflow_state } = frm.doc;
+    if (workflow_state !== "Draft") {
+      toggle_invoice_request(frm);
+    }
+  },
+
   matter_type: (frm) => {
     const type = frm.doc.matter_type;
 
@@ -81,7 +97,6 @@ frappe.ui.form.on("Matter", {
 
 const view_invoice_request = (frm) => {
   const invoiceRequest = frm.doc.invoice_request;
-  frm.remove_custom_button("Send Invoice Request");
 
   frm.add_custom_button(__("View Invoice Request"), () => {
     frappe.set_route("Form", "Matter Invoice Request", invoiceRequest);
@@ -89,12 +104,16 @@ const view_invoice_request = (frm) => {
 };
 
 const toggle_invoice_request = (frm) => {
-  const validate_inputs = () => {
-    const amountField = frm.fields_dict.amount.$input["0"];
-    const descriptionField = frm.fields_dict.description.$input["0"];
+  const validate_invoice_request = () => {
+    const amountField = find_element("[data-fieldname='amount']").querySelector(
+      "input"
+    );
+    const descriptionField = find_element(
+      "[data-fieldname='description']"
+    ).querySelector("textarea");
 
     const amount = amountField.value;
-    const description = descriptionField.innerText;
+    const description = descriptionField.value;
 
     if (amount == 0) {
       frappe.throw("Amount should be above 0!");
@@ -121,8 +140,43 @@ const toggle_invoice_request = (frm) => {
     view_invoice_request(frm);
   };
 
-  frm.add_custom_button(__("Send Invoice Request"), () => {
-    validate_inputs();
-    send_invoice_request();
+  validate_invoice_request();
+  send_invoice_request();
+};
+
+const find_element = (selector) => document.querySelector(selector);
+
+const check_assigned_user = async (frm) => {
+  console.log("Matter User: ", frappe.user.has_role("Matter User"));
+  console.log("System Manager: ", frappe.user.has_role("System Manager"));
+  if (
+    frappe.user.has_role("Matter User") &&
+    !frappe.user.has_role("System Manager")
+  ) {
+    const response = await frappe.call({
+      method:
+        "law_management.law_management.doctype.matter.matter.check_assigned_user",
+      args: {
+        docname: frm.doc.name,
+        user: frappe.session.user,
+      },
+    });
+
+    return response.message;
+  }
+  return true;
+};
+
+const assigned_current_user = async (frm) => {
+  const response = await frm.call({
+    method: "frappe.desk.form.assign_to.add",
+
+    args: {
+      assign_to: [frappe.session.user],
+      doctype: frm.doctype,
+      name: frm.docname,
+    },
   });
+
+  location.reload();
 };
