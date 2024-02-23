@@ -127,10 +127,13 @@ const toggle_invoice_request = (frm) => {
       method:
         "law_management.law_management.doctype.matter.matter.send_email_request",
       args: {
-        docname: frm.doc.name,
-        amount: frm.doc.amount,
-        description: frm.doc.description,
-        client_name: frm.doc.client_name,
+        info: {
+          docname: frm.doc.name,
+          amount: frm.doc.amount,
+          description: frm.doc.description,
+          client_name: frm.doc.client_name,
+          sender: frappe.session.user,
+        },
       },
     });
 

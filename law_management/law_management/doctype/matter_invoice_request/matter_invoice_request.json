@@ -14,8 +14,10 @@
   "client_name",
   "amount",
   "section_break_lvhsc",
-  "description",
   "sent_to",
+  "description",
+  "column_break_b8l0s",
+  "request_by",
   "amended_from"
  ],
  "fields": [
@@ -68,15 +70,25 @@
    "read_only": 1
   },
   {
+   "fieldname": "request_by",
+   "fieldtype": "Data",
+   "label": "Request By",
+   "read_only": 1
+  },
+  {
    "fieldname": "sent_to",
    "fieldtype": "Data",
-   "label": "Sent To",
-   "read_only": 1
+   "label": "Sent To"
+  },
+  {
+   "fieldname": "column_break_b8l0s",
+   "fieldtype": "Column Break"
   }
  ],
  "index_web_pages_for_search": 1,
+ "is_submittable": 1,
  "links": [],
- "modified": "2024-02-15 15:49:23.107311",
+ "modified": "2024-02-23 10:35:41.970344",
  "modified_by": "Administrator",
  "module": "Law Management",
  "name": "Matter Invoice Request",
@@ -93,6 +105,15 @@
    "role": "System Manager",
    "share": 1,
    "write": 1
+  },
+  {
+   "email": 1,
+   "export": 1,
+   "print": 1,
+   "read": 1,
+   "report": 1,
+   "role": "Matter User",
+   "share": 1
   }
  ],
  "sort_field": "modified",

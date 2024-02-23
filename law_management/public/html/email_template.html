@@ -1,0 +1,17 @@
+<section class="p-2 rounded">
+  <h3>An Invoice Request has been created by [Cllr/Atty].</h3>
+  <h4>Please find below the link to the invoice request document</h4>
+  <a href="https://www.hpaliberia.com/app/{{link}}">Open Document</a>
+</section>
+
+<p>
+	<p class="text-color">{{ body_content }}</p>
+</p>
+{% if description %}
+<blockquote>
+	{{ description | markdown }}
+</blockquote>
+{% endif %}
+<div class="more-info">
+	<a href="{{ doc_link }}">{{ _("Open Document") }}</a>
+</div>
