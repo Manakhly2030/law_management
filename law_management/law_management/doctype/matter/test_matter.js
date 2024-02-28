@@ -1,8 +1,6 @@
 // Copyright (c) 2022, Solufy and contributors
 // For license information, please see license.txt
 
-frappe.provide("matter");
-
 frappe.ui.form.on("Matter", {
   after_save: async (frm) => {
     const check = await check_assigned_user(frm);
@@ -78,7 +76,7 @@ frappe.ui.form.on("Matter", {
   send_invoice_request: (frm) => {
     const { workflow_state } = frm.doc;
     if (workflow_state !== "Draft") {
-      new matter.InvoiceRequest(frm);
+      toggle_invoice_request(frm);
     }
   },
 
@@ -180,63 +178,4 @@ const assigned_current_user = async (frm) => {
   });
 
   location.reload();
-};
-
-matter.InvoiceRequest = class InvoiceRequest {
-  constructor(frm) {
-    this.toggle_invoice_request(frm);
-  }
-
-  toggle_invoice_request = (frm) => {
-    this.validate_invoice_request();
-    this.send_invoice_request(frm);
-  };
-
-  view_invoice_request = (frm) => {
-    const invoiceRequest = frm.doc.invoice_request;
-
-    frm.add_custom_button(__("View Invoice Request"), () => {
-      frappe.set_route("Form", "Matter Invoice Request", invoiceRequest);
-    });
-  };
-
-  validate_invoice_request = () => {
-    const amountField = find_element("[data-fieldname='amount']").querySelector(
-      "input"
-    );
-    const descriptionField = find_element(
-      "[data-fieldname='description']"
-    ).querySelector("textarea");
-
-    const amount = amountField.value;
-    const description = descriptionField.value;
-
-    if (amount == 0) {
-      frappe.throw("Amount should be above 0!");
-    } else if (!description) {
-      frappe.throw("Please enter the description!");
-    }
-  };
-
-  send_invoice_request = async (frm) => {
-    const form = frm.doc;
-    const response = await frappe.call({
-      method:
-        "law_management.law_management.doctype.matter.matter.send_email_request",
-      args: {
-        info: {
-          docname: form.name,
-          amount: form.amount,
-          description: form.description,
-          client_name: form.client_name,
-          sender: frappe.session.user,
-        },
-      },
-    });
-
-    frm.set_value("invoice_request", response.message);
-    frm.save();
-    setTimeout(() => frappe.msgprint("Email sent succesfully"), 2000);
-    this.view_invoice_request(frm);
-  };
 };

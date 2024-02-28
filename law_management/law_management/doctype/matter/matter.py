@@ -13,6 +13,7 @@ class Matter(Document):
 
 
 def validate(self, cdt):
+
     test_d = frappe.db.get_value("Item", {'name': self.name}, 'name')
     if not test_d:
         vals = frappe.get_doc({"doctype": "Item", "name": self.name, "item_name": self.matter_name,
@@ -22,7 +23,6 @@ def validate(self, cdt):
 
 @frappe.whitelist()
 def email_sent(docname):
-
     return frappe.db.get_value("Matter Invoice Request", {"matter_name": docname}, "matter_name")
 
 
@@ -38,11 +38,12 @@ def send_email_request(info):
     try:
         frappe.sendmail(
             recipients=email_group,
+            cc=email_group,
             subject=frappe._(f'Invoice Request'),
             template='new_notification',
             args=dict(
-                body_content=f'<div class="gray-container text-center">Invoice Request for {arguments["docname"]}</div>',
-                description=f'Please find below the link to the invoice request document {arguments["description"]}',
+                body_content=f'<div class="gray-container">Invoice Request for {arguments["docname"]}</div>',
+                description=f'<div><h4>Description: </h4>Please find below the link to the invoice request document</div>',
                 doc_link=f"https://hpaliberia.com/app/matter-invoice-request/{invoice_request}"
             ),
         )
@@ -76,7 +77,7 @@ def check_assigned_user(docname, user):
         return False
     users = ast.literal_eval(assigned_user[0]._assign)
 
-    return False if user in users and user == assigned_user[0].owner else True
+    return False if user in users else True
 
 
 def get_email_group(name):
@@ -94,3 +95,11 @@ def get_email_group(name):
 
 def get_email_template():
     return frappe.db.get_value("Email Template", {'name': 'Matter Invoice Request'}, ["response_html"])
+
+
+def on_trash(self, cdt):
+    invoice_request = frappe.db.get_value(
+        "Matter Invoice Request", {'name': self.invoice_request}, 'name')
+
+    if invoice_request:
+        frappe.delete_doc("Matter Invoice Request", invoice_request)
