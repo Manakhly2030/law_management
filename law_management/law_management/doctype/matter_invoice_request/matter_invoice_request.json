@@ -10,6 +10,7 @@
  "field_order": [
   "matter_name",
   "date",
+  "practice_group",
   "column_break_vpx95",
   "client_name",
   "amount",
@@ -36,11 +37,11 @@
   {
    "fieldname": "amended_from",
    "fieldtype": "Link",
+   "hidden": 1,
    "label": "Amended From",
    "no_copy": 1,
    "options": "Matter Invoice Request",
    "print_hide": 1,
-   "read_only": 1,
    "search_index": 1
   },
   {
@@ -83,12 +84,18 @@
   {
    "fieldname": "column_break_b8l0s",
    "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "practice_group",
+   "fieldtype": "Data",
+   "label": "Practice Group",
+   "read_only": 1
   }
  ],
  "index_web_pages_for_search": 1,
  "is_submittable": 1,
  "links": [],
- "modified": "2024-02-23 10:35:41.970344",
+ "modified": "2024-03-19 15:10:51.957365",
  "modified_by": "Administrator",
  "module": "Law Management",
  "name": "Matter Invoice Request",

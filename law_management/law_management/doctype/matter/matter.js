@@ -220,6 +220,7 @@ matter.InvoiceRequest = class InvoiceRequest {
 
   send_invoice_request = async (frm) => {
     const form = frm.doc;
+    console.log(form.practice_group);
     const response = await frappe.call({
       method:
         "law_management.law_management.doctype.matter.matter.send_email_request",
@@ -230,6 +231,7 @@ matter.InvoiceRequest = class InvoiceRequest {
           description: form.description,
           client_name: form.client_name,
           sender: frappe.session.user,
+          practice_group: form.practice_group,
         },
       },
     });

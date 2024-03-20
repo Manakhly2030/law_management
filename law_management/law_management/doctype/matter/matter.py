@@ -62,6 +62,7 @@ def create_matter_invoice_request(arguments, email_group):
     invoice_request.client_name = arguments["client_name"]
     invoice_request.description = arguments["description"]
     invoice_request.request_by = arguments["sender"]
+    invoice_request.practice_group = arguments["practice_group"]
     invoice_request.sent_to = ", ".join(email_group)
     invoice_request.insert()
     return invoice_request.name
